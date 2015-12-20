@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="OUmembers">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Firstname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Lastname" Type="nvarchar" MaxLength="50" />
+    <Property Name="Age" Type="int" />
+    <Property Name="OUmemberUser_OUmember_Id" Type="bigint" Nullable="false" />
+  </EntityType>
+  <EntityType Name="Users">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="bigint" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
+    <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="OUmemberId" Type="bigint" Nullable="false" />
+  </EntityType>
+  <Association Name="FK_OUmemberUser">
+    <End Role="Users" Type="Self.Users" Multiplicity="1" />
+    <End Role="OUmembers" Type="Self.OUmembers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="Users">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="OUmembers">
+        <PropertyRef Name="OUmemberUser_OUmember_Id" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="DBModelStoreContainer">
+    <EntitySet Name="OUmembers" EntityType="Self.OUmembers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_OUmemberUser" Association="Self.FK_OUmemberUser">
+      <End Role="Users" EntitySet="Users" />
+      <End Role="OUmembers" EntitySet="OUmembers" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

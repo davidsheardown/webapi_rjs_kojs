@@ -1,0 +1,10 @@
+C:\Users\David\Source\RestFramework\BusinessEntities\bin\Debug\BusinessEntities.dll
+C:\Users\David\Source\RestFramework\BusinessEntities\bin\Debug\BusinessEntities.pdb
+C:\Users\David\Source\RestFramework\BusinessEntities\obj\Debug\BusinessEntities.dll
+C:\Users\David\Source\RestFramework\BusinessEntities\obj\Debug\BusinessEntities.pdb
+C:\Users\David\Source\RestFramework\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+C:\Users\David\Source\RestFramework2015\BusinessEntities\bin\Debug\BusinessEntities.dll
+C:\Users\David\Source\RestFramework2015\BusinessEntities\bin\Debug\BusinessEntities.pdb
+C:\Users\David\Source\RestFramework2015\BusinessEntities\obj\Debug\BusinessEntities.csprojResolveAssemblyReference.cache
+C:\Users\David\Source\RestFramework2015\BusinessEntities\obj\Debug\BusinessEntities.dll
+C:\Users\David\Source\RestFramework2015\BusinessEntities\obj\Debug\BusinessEntities.pdb

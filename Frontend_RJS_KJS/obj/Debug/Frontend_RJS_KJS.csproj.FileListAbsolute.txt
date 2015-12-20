@@ -1,0 +1,6 @@
+C:\Users\David\Source\RestFramework2015\Frontend_RJS_KJS\bin\HTML5 Boiler Plate v4.3.dll.config
+C:\Users\David\Source\RestFramework2015\Frontend_RJS_KJS\bin\HTML5 Boiler Plate v4.3.dll
+C:\Users\David\Source\RestFramework2015\Frontend_RJS_KJS\bin\HTML5 Boiler Plate v4.3.pdb
+C:\Users\David\Source\RestFramework2015\Frontend_RJS_KJS\obj\Debug\Frontend_RJS_KJS.csprojResolveAssemblyReference.cache
+C:\Users\David\Source\RestFramework2015\Frontend_RJS_KJS\obj\Debug\HTML5 Boiler Plate v4.3.dll
+C:\Users\David\Source\RestFramework2015\Frontend_RJS_KJS\obj\Debug\HTML5 Boiler Plate v4.3.pdb
