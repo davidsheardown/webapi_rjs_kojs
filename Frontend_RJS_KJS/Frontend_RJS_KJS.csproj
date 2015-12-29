@@ -60,7 +60,7 @@
   <ItemGroup>
     <Content Include="404.html" />
     <Content Include="App\core.js" />
-    <Content Include="App\Dataservices\dataservice-instance.js" />
+    <Content Include="App\Dataservices\genericRepository.js" />
     <Content Include="App\Dataservices\dataservice.js" />
     <Content Include="App\init.js" />
     <Content Include="App\router.js" />
@@ -93,6 +93,8 @@
     <Content Include="Scripts\GPL-LICENSE.txt" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+    <Content Include="Scripts\json3.js" />
+    <Content Include="Scripts\json3.min.js" />
     <Content Include="Scripts\knockout-3.4.0.debug.js" />
     <Content Include="Scripts\knockout-3.4.0.js" />
     <Content Include="Scripts\knockout.mapping-latest.debug.js" />
@@ -108,6 +110,8 @@
     <Content Include="Scripts\text.js" />
     <Content Include="Scripts\toastr.js" />
     <Content Include="Scripts\toastr.min.js" />
+    <Content Include="Scripts\underscore.js" />
+    <Content Include="Scripts\underscore.min.js" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -121,6 +125,7 @@
     <Content Include="README.md" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
     <Content Include="Scripts\knockout.validation.min.js.map" />
+    <Content Include="Scripts\underscore.min.map" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -144,7 +149,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>55445</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost:55445/</IISUrl>
+          <IISUrl>http://localhost:8080/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

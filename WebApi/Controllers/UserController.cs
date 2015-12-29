@@ -6,13 +6,12 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-using BusinessEntities;
+using EntityDTO;
 using BusinessServices;
 using BusinessServices.Contracts;
 
 namespace WebApi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class UserController : ApiController
     {
         private readonly IUserServices _userServices;
@@ -27,15 +26,15 @@ namespace WebApi.Controllers
         #endregion
 
         [HttpPost]
-        public HttpResponseMessage Post(BusinessEntities.LoginRequestEntity loginEntity)
+        public HttpResponseMessage Post(LoginRequestDTO loginDTO)
         {
-            if (loginEntity != null)
+            if (loginDTO != null)
             {
-                var user = _userServices.GetUserLogin(loginEntity.loginUsername, loginEntity.loginPassword);
+                var user = _userServices.GetUserLogin(loginDTO.loginUsername, loginDTO.loginPassword);
                 if (user != null)
                     return Request.CreateResponse(HttpStatusCode.OK, user);
             }
-            return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No user found matching supplied data");
+            return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "No user found matching supplied data");
         }
     }
 }

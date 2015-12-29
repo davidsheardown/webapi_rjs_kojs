@@ -1,27 +1,75 @@
-﻿define(['knockout', 'knockout-mapping', 'dataservices/dataservice-instance', 'app/core', 'app/router'], function (ko, koMapping, dataservice_instance, core, router) {
+﻿define(['knockout', 'knockout-mapping', 'dataservices/genericRepository', 'app/core', 'app/router'], function (ko, koMapping, genericRepository, core, router) {
 
     //  Set the service route(s)
-    var dataservice_index = new dataservice_instance('http://localhost:8081/api/v1/oumember');
+    var dataservice_index = new genericRepository('http://localhost:8081/api/v1/oumember/');
+
+    // Define member model
+    function member() {
+        this.Id = 0;
+        this.Firstname = null;
+        this.Lastname = null;
+        this.Age = null;
+    }
 
     var viewModel = {
 
         //  Even though our data is coming via the mapping, we need to add certain validation rules
         //memberDOBDay: ko.observable().extend({ minLength: 2, maxLength: 2 }),
 
-        save: function () {
-            var saveData = koMapping.toJS(viewModel);
-            dataservice_index.putEntity(saveData.Id, koMapping.toJSON(saveData), {
-                success: function (data) {
-                    //router.routeTo('form2'); // Move to the next profile section
-                },
-                error: function (err) {
-                    core.genericAjaxErrorCheck(error);
-                }
-            });
+        members: ko.observableArray([]),
+
+        add: function () {
+            viewModel.members.push(new member());
+        },
+
+        remove: function (item) {
+            if (item.Id > 0) {
+                dataservice_index.deleteEntity(item.Id, {
+                    done: function (data) {
+                        viewModel.members.remove(item);
+                    }
+                });
+            }
+        },
+
+        save: function (data, event) {
+
+            if (data.Id == 0) {
+                dataservice_index.postEntity(koMapping.toJSON(data), {
+                    done: function (boolResponse) {
+                        if (boolResponse) {
+                            router.routeTo('index');
+                            return;
+                        }
+                        else {
+                            core.notify.error('Cannot add/save item at this time');
+                        }
+                    }
+                });
+            }
+            else {
+                dataservice_index.putEntity(data.Id, koMapping.toJSON(data), {
+                    done: function (boolResponse) {
+                        if (boolResponse) {
+                            router.routeTo('index');
+                            return;
+                        }
+                        else {
+                            core.notify.error('Could not update/save at this time');
+                            return;
+                        }
+                    },
+                    fail: function (err) {
+                        core.notify.error('Could not update/save at this time, please retry');
+                        console.log('index-vm', err);
+                        return;
+                    }
+                });
+            }
         },
 
         cancel: function () {
-             core.restartLogin();
+            router.routeTo('login');
         }
     };
 
@@ -32,9 +80,8 @@
     }
 
     function koMapData(datasource) {
-        koMapping.fromJS(datasource, null, viewModel);
-        ko.applyBindings(viewModel);
-        console.log('index-vm', datasource, viewModel);
+        viewModel.members = ko.observableArray(ko.toJS(datasource));
+        ko.applyBindings(viewModel, $('members')[0]);
     };
 
     return {

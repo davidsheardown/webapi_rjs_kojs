@@ -12,10 +12,6 @@
   <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
     <EntitySet Name="OUmembers" EntityType="Self.OUmember" />
     <EntitySet Name="Users" EntityType="DBModel.User" />
-    <AssociationSet Name="OUmemberUser" Association="DBModel.OUmemberUser">
-      <End Role="OUmember" EntitySet="OUmembers" />
-      <End Role="User" EntitySet="Users" />
-    </AssociationSet>
   </EntityContainer>
   <EntityType Name="User">
     <Key>
@@ -24,12 +20,9 @@
     <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
     <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-    <Property Name="OUmemberId" Type="Int64" Nullable="false" />
-    <NavigationProperty Name="OUmember" Relationship="DBModel.OUmemberUser" FromRole="User" ToRole="OUmember" />
     <Property Name="UserGuid" Type="Guid" Nullable="false" />
+    <Property Name="UserActive" Type="Boolean" Nullable="false" />
+    <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="LastUpdated" Type="DateTime" Precision="3" />
   </EntityType>
-  <Association Name="OUmemberUser">
-    <End Type="DBModel.OUmember" Role="OUmember" Multiplicity="1" />
-    <End Type="DBModel.User" Role="User" Multiplicity="1" />
-  </Association>
 </Schema>

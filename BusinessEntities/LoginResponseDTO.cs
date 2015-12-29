@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessEntities
+namespace EntityDTO
 {
-    public class LoginResponseEntity
+    public class LoginResponseDTO
     {
         public string Username { get; set; }
         public System.Guid UserGuid { get; set; }

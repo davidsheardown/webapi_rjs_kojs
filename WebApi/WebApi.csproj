@@ -230,6 +230,8 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Handlers\CorsHandler.cs" />
+    <Compile Include="Helpers\Utils.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -339,7 +341,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\WebApiTestClient.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -357,9 +361,9 @@
     <Content Include="Scripts\jquery-1.10.2.min.map" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">
+    <ProjectReference Include="..\BusinessEntities\EntityDTO.csproj">
       <Project>{012c0e7f-8543-49bd-862a-bb5cd9e138a3}</Project>
-      <Name>BusinessEntities</Name>
+      <Name>EntityDTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\BusinessServices\BusinessServices.csproj">
       <Project>{3fcc3d13-20a2-4d7a-9ac6-623f325fe087}</Project>

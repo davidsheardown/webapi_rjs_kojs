@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BusinessEntities", "BusinessEntities\BusinessEntities.csproj", "{012C0E7F-8543-49BD-862A-BB5CD9E138A3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EntityDTO", "BusinessEntities\EntityDTO.csproj", "{012C0E7F-8543-49BD-862A-BB5CD9E138A3}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataModel", "DataModel\DataModel.csproj", "{43CB44F0-6371-422E-BAD0-34F686F2D2CC}"
 EndProject

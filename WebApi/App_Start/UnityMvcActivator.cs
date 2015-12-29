@@ -1,6 +1,7 @@
 using System.Linq;
 using System.Web.Mvc;
 using Microsoft.Practices.Unity.Mvc;
+using Microsoft.Practices.ServiceLocation;
 using System.Web.Http;
 
 [assembly: WebActivatorEx.PreApplicationStartMethod(typeof(WebApi.App_Start.UnityWebActivator), "Start")]

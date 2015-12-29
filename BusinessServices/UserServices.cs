@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using DataModel;
 using DataModel.UnitOfWork;
-using BusinessEntities;
+using EntityDTO;
 using BusinessServices.Contracts;
 
 namespace BusinessServices
@@ -21,15 +21,26 @@ namespace BusinessServices
             _unitOfWork = unitOfWork;
         }
 
-        public BusinessEntities.LoginResponseEntity GetUserLogin(string username, string password)
+        public EntityDTO.LoginResponseDTO GetUserLogin(string username, string password)
         {
             var user = _unitOfWork.UserRepository.Get(x => x.Username == username && x.Password == password);
             if (user != null)
             {
-                Mapper.CreateMap<User, LoginResponseEntity>();
-                return Mapper.Map<User, LoginResponseEntity>(user);
+                Mapper.CreateMap<User, LoginResponseDTO>();
+                return Mapper.Map<User, LoginResponseDTO>(user);
             }
             return null;
+        }
+
+        public bool CheckUserToken(string userToken)
+        {
+            var tokenGuid = Guid.Parse(userToken);
+            var tokenResponse = _unitOfWork.UserRepository.Get(x => x.UserGuid == tokenGuid && x.UserActive == true);
+            if (tokenResponse != null)
+            {
+                return true;
+            }
+            return false;
         }
     }
 }

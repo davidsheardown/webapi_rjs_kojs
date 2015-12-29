@@ -107,7 +107,7 @@ define(['jquery', 'toastr', 'amplify'], function ($, toastr, amplify) {
             cacheItem: loginObject,
             cacheType: cacheType.session
         });
-        return bok;
+        return;
     }
 
     // Clear login cache object, redirect to login page
@@ -121,7 +121,9 @@ define(['jquery', 'toastr', 'amplify'], function ($, toastr, amplify) {
         }
     }
     function login() {
-        window.location = '/login.html';
+        window.setTimeout(function () {
+            window.location = '/login.html';
+        }, 2000);
     }
 
     // AJAX error helper

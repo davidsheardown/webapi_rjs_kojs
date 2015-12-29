@@ -5,9 +5,8 @@
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
       <Diagram DiagramId="880790f27729404999d69de380b86037" Name="Diagram1">
-        <EntityTypeShape EntityType="DBModel.OUmember" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="DBModel.OUmember" Width="1.5" PointX="0.75" PointY="1.125" IsExpanded="true" />
         <EntityTypeShape EntityType="DBModel.User" Width="1.5" PointX="3" PointY="0.75" />
-        <AssociationConnector Association="DBModel.OUmemberUser" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

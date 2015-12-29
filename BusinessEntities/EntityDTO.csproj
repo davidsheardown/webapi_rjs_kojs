@@ -39,11 +39,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginRequestEntity.cs" />
-    <Compile Include="LoginResponseEntity.cs" />
-    <Compile Include="OUmemberEntity.cs" />
+    <Compile Include="LoginRequestDTO.cs" />
+    <Compile Include="LoginResponseDTO.cs" />
+    <Compile Include="OUmemberDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="UserEntity.cs" />
+    <Compile Include="UserDTO.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

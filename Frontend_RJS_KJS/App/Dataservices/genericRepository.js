@@ -1,4 +1,4 @@
-﻿// DATASERVICE-INSTANCE.JS
+﻿// genericRepository.JS
 // Inherits the base dataservice.js generic Ajax method, and provides a generic set of repository functions
 
 define(['dataservices/dataservice'], function (dataservice) {
@@ -15,7 +15,7 @@ define(['dataservices/dataservice'], function (dataservice) {
 
         //  Set the route or throw error if not defined
         if (setRoute === undefined) {
-            throw new Error('dataservice-instance does not have a valid route passed: ' + self.name);
+            throw new Error('genericRepository does not have a valid route passed: ' + self.name);
         }
         self.route = setRoute;
 
@@ -43,8 +43,8 @@ define(['dataservices/dataservice'], function (dataservice) {
             .fail(callbacks.fail)
         }
 
-        self.deleteEntity = function (id, data, callbacks) {
-            return dataservice.ajaxRequest('DELETE', routeUrl(self.route, id), data)
+        self.deleteEntity = function (id, callbacks) {
+            return dataservice.ajaxRequest('DELETE', routeUrl(self.route, id))
             .done(callbacks.done)
             .fail(callbacks.fail)
         }

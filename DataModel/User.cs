@@ -17,9 +17,9 @@ namespace DataModel
         public long Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public long OUmemberId { get; set; }
         public System.Guid UserGuid { get; set; }
-    
-        public virtual OUmember OUmember { get; set; }
+        public bool UserActive { get; set; }
+        public System.DateTime DateCreated { get; set; }
+        public Nullable<System.DateTime> LastUpdated { get; set; }
     }
 }

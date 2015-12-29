@@ -4,15 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessEntities
+namespace EntityDTO
 {
-    public class UserEntity
+    public class UserDTO
     {
         public long Id { get; set; }
         public string Username { get; set; }
         public string Password { get; set; }
-        public long OUmemberId { get; set; }
         public System.Guid UserGuid { get; set; }
-        public OUmemberEntity OUmember { get; set; }
     }
 }

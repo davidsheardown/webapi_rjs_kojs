@@ -9,9 +9,34 @@
     <script src="Scripts/require.js" data-main="App/init.js"></script>
 
 </head>
-<body>
+<body id="members">
 
     <p>Index</p>
 
+    <table>
+        <thead>
+            <tr>
+                <td>Firstname</td>
+                <td>Lastname</td>
+                <td>Age</td>
+            </tr>
+        </thead>
+        <tbody data-bind="foreach: members">
+            <tr>
+                <td>
+                    <input data-bind="value: Firstname" />
+                </td>
+                <td>
+                    <input data-bind="value: Lastname" />
+                </td>
+                <td>
+                    <input data-bind="value: Age" />
+                </td>
+                <td><button data-bind="click: $root.save">update</button></td>
+                <td><button data-bind="click: $root.remove, enable: $root.members().length>0">remove</button></td>
+            </tr>
+        </tbody>
+    </table>
+    <button data-bind="click: add, enable: members().length<5">add</button>
 </body>
 </html>

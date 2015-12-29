@@ -3,7 +3,6 @@
     var routes = {
         login: { html: '/login.html', app: 'views/login' },
         index: { html: '/index.html', app: 'views/index' },
-        form3: { html: '/profile3.html', app: 'views/profile3' },
         thankyou: { html: '/profile-thankyou.html', app: 'views/profile-thankyou.html' }
     }
 

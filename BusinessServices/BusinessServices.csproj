@@ -53,9 +53,9 @@
     <Compile Include="UserServices.cs" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\BusinessEntities\BusinessEntities.csproj">
+    <ProjectReference Include="..\BusinessEntities\EntityDTO.csproj">
       <Project>{012c0e7f-8543-49bd-862a-bb5cd9e138a3}</Project>
-      <Name>BusinessEntities</Name>
+      <Name>EntityDTO</Name>
     </ProjectReference>
     <ProjectReference Include="..\DataModel\DataModel.csproj">
       <Project>{43cb44f0-6371-422e-bad0-34f686f2d2cc}</Project>

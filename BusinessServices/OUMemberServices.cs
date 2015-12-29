@@ -8,7 +8,7 @@ using System.Transactions;
 using AutoMapper;
 using DataModel;
 using DataModel.UnitOfWork;
-using BusinessEntities;
+using EntityDTO;
 using BusinessServices.Contracts;
 
 namespace BusinessServices
@@ -23,38 +23,38 @@ namespace BusinessServices
 
         }
 
-        public BusinessEntities.OUmemberEntity GetOUMemberById(long ouMemberId)
+        public EntityDTO.OUmemberDTO GetOUMemberById(long ouMemberId)
         {
             var ouMember = _unitOfWork.OUMemberRepository.GetByID(ouMemberId);
             if (ouMember != null)
             {
-                Mapper.CreateMap<OUmember, OUmemberEntity>();
-                var ouMemberModel = Mapper.Map<OUmember, OUmemberEntity>(ouMember);
+                Mapper.CreateMap<OUmember, OUmemberDTO>();
+                var ouMemberModel = Mapper.Map<OUmember, OUmemberDTO>(ouMember);
                 return ouMemberModel;
             }
             return null;
         }
 
-        public IEnumerable<BusinessEntities.OUmemberEntity> GetOUMemberByName(string ouMemberName)
+        public IEnumerable<EntityDTO.OUmemberDTO> GetOUMemberByName(string ouMemberName)
         {
             IEnumerable<DataModel.OUmember> ouMembers = _unitOfWork.OUMemberRepository.GetMany(x => (x.Firstname + " " + x.Lastname).StartsWith(ouMemberName));
-            Mapper.CreateMap<OUmember, OUmemberEntity>();
-            return Mapper.Map<IEnumerable<OUmember>, IEnumerable<OUmemberEntity>>(ouMembers);
+            Mapper.CreateMap<OUmember, OUmemberDTO>();
+            return Mapper.Map<IEnumerable<OUmember>, IEnumerable<OUmemberDTO>>(ouMembers);
         }
 
-        public IEnumerable<BusinessEntities.OUmemberEntity> GetAllOUMembers()
+        public IEnumerable<EntityDTO.OUmemberDTO> GetAllOUMembers()
         {
             var ouMembers = _unitOfWork.OUMemberRepository.GetAll().ToList();
             if(ouMembers.Any())
             {
-                Mapper.CreateMap<OUmember, OUmemberEntity>();
-                var ouMembersModel = Mapper.Map<List<OUmember>, List<OUmemberEntity>>(ouMembers);
+                Mapper.CreateMap<OUmember, OUmemberDTO>();
+                var ouMembersModel = Mapper.Map<List<OUmember>, List<OUmemberDTO>>(ouMembers);
                 return ouMembersModel;
             }
             return null;
         }
 
-        public long CreateOUMember(BusinessEntities.OUmemberEntity ouMemberEntity)
+        public long CreateOUMember(EntityDTO.OUmemberDTO ouMemberEntity)
         {
             using(var scope = new TransactionScope())
             {
@@ -72,7 +72,7 @@ namespace BusinessServices
             }
         }
 
-        public bool UpdateOUMember(long ouMemberId, BusinessEntities.OUmemberEntity ouMemberEntity)
+        public bool UpdateOUMember(long ouMemberId, EntityDTO.OUmemberDTO ouMemberEntity)
         {
             var success = false;
             if(ouMemberEntity != null)

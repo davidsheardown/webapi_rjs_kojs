@@ -14,21 +14,15 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.User)">
         <MappingFragment StoreEntitySet="Users">
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+          <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+          <ScalarProperty Name="UserActive" ColumnName="UserActive" />
           <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
           <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="OUmemberId" ColumnName="OUmemberId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="OUmemberUser" TypeName="DBModel.OUmemberUser" StoreEntitySet="OUmembers">
-      <EndProperty Name="User">
-        <ScalarProperty Name="Id" ColumnName="OUmemberUser_OUmember_Id" />
-      </EndProperty>
-      <EndProperty Name="OUmember">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping>

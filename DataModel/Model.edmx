@@ -13,7 +13,6 @@
           <Property Name="Firstname" Type="nvarchar" MaxLength="50" />
           <Property Name="Lastname" Type="nvarchar" MaxLength="50" />
           <Property Name="Age" Type="int" />
-          <Property Name="OUmemberUser_OUmember_Id" Type="bigint" Nullable="false" />
         </EntityType>
         <EntityType Name="Users">
           <Key>
@@ -23,27 +22,13 @@
           <Property Name="UserGuid" Type="uniqueidentifier" Nullable="false" />
           <Property Name="Username" Type="nvarchar" MaxLength="50" Nullable="false" />
           <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
-          <Property Name="OUmemberId" Type="bigint" Nullable="false" />
+          <Property Name="UserActive" Type="bit" Nullable="false" />
+          <Property Name="DateCreated" Type="datetime" Nullable="false" />
+          <Property Name="LastUpdated" Type="datetime" />
         </EntityType>
-        <Association Name="FK_OUmemberUser">
-          <End Role="Users" Type="Self.Users" Multiplicity="1" />
-          <End Role="OUmembers" Type="Self.OUmembers" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Users">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="OUmembers">
-              <PropertyRef Name="OUmemberUser_OUmember_Id" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <EntityContainer Name="DBModelStoreContainer">
           <EntitySet Name="OUmembers" EntityType="Self.OUmembers" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
-          <AssociationSet Name="FK_OUmemberUser" Association="Self.FK_OUmemberUser">
-            <End Role="Users" EntitySet="Users" />
-            <End Role="OUmembers" EntitySet="OUmembers" />
-          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -61,10 +46,6 @@
         <EntityContainer Name="DBEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="OUmembers" EntityType="Self.OUmember" />
           <EntitySet Name="Users" EntityType="DBModel.User" />
-          <AssociationSet Name="OUmemberUser" Association="DBModel.OUmemberUser">
-            <End Role="OUmember" EntitySet="OUmembers" />
-            <End Role="User" EntitySet="Users" />
-          </AssociationSet>
         </EntityContainer>
         <EntityType Name="User">
           <Key>
@@ -73,14 +54,11 @@
           <Property Name="Id" Type="Int64" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="Username" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="OUmemberId" Type="Int64" Nullable="false" />
-          <NavigationProperty Name="OUmember" Relationship="DBModel.OUmemberUser" FromRole="User" ToRole="OUmember" />
           <Property Name="UserGuid" Type="Guid" Nullable="false" />
+          <Property Name="UserActive" Type="Boolean" Nullable="false" />
+          <Property Name="DateCreated" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="LastUpdated" Type="DateTime" Precision="3" />
         </EntityType>
-        <Association Name="OUmemberUser">
-          <End Type="DBModel.OUmember" Role="OUmember" Multiplicity="1" />
-          <End Type="DBModel.User" Role="User" Multiplicity="1" />
-        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -100,22 +78,16 @@
     <EntitySetMapping Name="Users">
       <EntityTypeMapping TypeName="IsTypeOf(DBModel.User)">
         <MappingFragment StoreEntitySet="Users">
-          <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
+          <ScalarProperty Name="LastUpdated" ColumnName="LastUpdated" />
+                <ScalarProperty Name="DateCreated" ColumnName="DateCreated" />
+                <ScalarProperty Name="UserActive" ColumnName="UserActive" />
+                <ScalarProperty Name="UserGuid" ColumnName="UserGuid" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
           <ScalarProperty Name="Username" ColumnName="Username" />
           <ScalarProperty Name="Password" ColumnName="Password" />
-          <ScalarProperty Name="OUmemberId" ColumnName="OUmemberId" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <AssociationSetMapping Name="OUmemberUser" TypeName="DBModel.OUmemberUser" StoreEntitySet="OUmembers">
-      <EndProperty Name="User">
-        <ScalarProperty Name="Id" ColumnName="OUmemberUser_OUmember_Id" />
-      </EndProperty>
-      <EndProperty Name="OUmember">
-        <ScalarProperty Name="Id" ColumnName="Id" />
-      </EndProperty>
-    </AssociationSetMapping>
   </EntityContainerMapping>
 </Mapping></edmx:Mappings>
   </edmx:Runtime>

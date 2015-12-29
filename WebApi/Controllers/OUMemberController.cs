@@ -6,23 +6,24 @@ using System.Net.Http;
 using System.Web.Http;
 using System.Web.Http.Cors;
 
-using BusinessEntities;
+using EntityDTO;
 using BusinessServices;
 using BusinessServices.Contracts;
 using WebApi.Filters;
 
 namespace WebApi.Controllers
 {
-    [EnableCors(origins: "*", headers: "*", methods: "*")]
     public class OUMemberController : ApiController
     {
-         private readonly IOUMemberServices _ouMemberServices;
+        private readonly IOUMemberServices _ouMemberServices;
+        private readonly IUserServices _userServices;
 
-         #region Public Constructor
+        #region Public Constructor
 
-        public OUMemberController(IOUMemberServices ouMemberServices)
+        public OUMemberController(IOUMemberServices ouMemberServices, IUserServices userServices)
         {
             _ouMemberServices = ouMemberServices;
+            _userServices = userServices;
         }
 
         #endregion
@@ -30,13 +31,12 @@ namespace WebApi.Controllers
         [Route("api/v1/OUMember/all")]
         [Route("api/v1/OUMember")]
         [HttpGet]
-        [ValidateUser]
         public HttpResponseMessage Get()
         {
             var ouMembers = _ouMemberServices.GetAllOUMembers();
             if (ouMembers != null)
             {
-                var ouMemberEntities = ouMembers as List<OUmemberEntity> ?? ouMembers.ToList();
+                var ouMemberEntities = ouMembers as List<OUmemberDTO> ?? ouMembers.ToList();
                 if (ouMemberEntities.Any())
                     return Request.CreateResponse(HttpStatusCode.OK, ouMemberEntities);
             }
@@ -55,6 +55,7 @@ namespace WebApi.Controllers
 
         [Route("api/v1/OUMember/{name}")]
         [HttpGet]
+        [ValidateUser]
         public HttpResponseMessage Get(string name)
         {
             var ouMembers = _ouMemberServices.GetOUMemberByName(name);
@@ -66,6 +67,7 @@ namespace WebApi.Controllers
         [Route("api/v1/OUMember/{id:int}")]
         [Route("api/v1/OUMember/{order=int}")]
         [HttpGet]
+        [ValidateUser]
         public HttpResponseMessage Get(long id)
         {
             var ouMember = _ouMemberServices.GetOUMemberById(id);
@@ -74,12 +76,18 @@ namespace WebApi.Controllers
             return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No OUMember found for this id");
         }
 
-        public long Post([FromBody] OUmemberEntity ouMemberEntity)
+        [Route("api/v1/OUMember")]
+        [HttpPost]
+        [ValidateUser]
+        public long Post(OUmemberDTO ouMemberEntity)
         {
             return _ouMemberServices.CreateOUMember(ouMemberEntity);
         }
 
-        public bool Put(long id, [FromBody]OUmemberEntity ouMemberEntity)
+        [Route("api/v1/OUMember/{id:int}")]
+        [HttpPut]
+        [ValidateUser]
+        public bool Put(long id, [FromBody]OUmemberDTO ouMemberEntity)
         {
             if (id  > 0)
             {
@@ -88,6 +96,9 @@ namespace WebApi.Controllers
             return false;
         }
 
+        [Route("api/v1/OUMember/{id:int}")]
+        [HttpDelete]
+        [ValidateUser]
         public bool Delete(long id)
         {
             if (id > 0)

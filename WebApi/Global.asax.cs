@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Web.Optimization;
 using System.Web.Routing;
 using WebApi.App_Start;
+using WebApi.Handlers;
 
 namespace WebApi
 {
@@ -21,6 +22,7 @@ namespace WebApi
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
 
+            //GlobalConfiguration.Configuration.MessageHandlers.Add(new CorsHandler());
         }
     }
 }

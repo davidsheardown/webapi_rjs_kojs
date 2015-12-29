@@ -1,5 +1,5 @@
 ﻿
-define(['knockout', 'knockout-validation', 'dataservices/dataservice-instance', 'app/core'], function (ko, kovalid, dataservice_instance, core) {
+define(['knockout', 'knockout-validation', 'dataservices/genericRepository', 'app/core'], function (ko, kovalid, genericRepository, core) {
 
     var viewModel = ko.validatedObservable({
 
@@ -21,15 +21,12 @@ define(['knockout', 'knockout-validation', 'dataservices/dataservice-instance', 
             //  Ok, proceed to check login credentials
             var vmDTO = ko.toJSON(viewModel);
 
-            dataservice_login = new dataservice_instance('http://localhost:8081/api/v1/User');
+            dataservice_login = new genericRepository('http://localhost:8081/api/v1/User');
             dataservice_login.postEntity(vmDTO, {
                 done: function (loginObject) {
 
                     //  Login successful, cache returned login object
                     var bChk = core.saveLoginObject(loginObject);
-                    if (bChk === false) { // Just to check if the cache has been inserted ok..
-                        console.log('Login succeeded, although login object could not be cached');
-                    }
 
                     //  Trigger the success publish - see login.js for continuation
                     amplify.publish('loginSuccess');

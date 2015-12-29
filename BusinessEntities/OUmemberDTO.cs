@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BusinessEntities
+namespace EntityDTO
 {
-    public class OUmemberEntity
+    public class OUmemberDTO
     {
         public long Id { get; set; }
         public string Firstname { get; set; }
