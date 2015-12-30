@@ -11,6 +11,10 @@
         this.Age = null;
     }
 
+    var viewModelList = {
+        selectedItemIndexval: ko.observable(1),
+    }
+
     var viewModel = {
 
         //  Even though our data is coming via the mapping, we need to add certain validation rules
@@ -26,10 +30,11 @@
             if (item.Id > 0) {
                 dataservice_index.deleteEntity(item.Id, {
                     done: function (data) {
-                        viewModel.members.remove(item);
+                        core.notify.info('Removed item successfully');
                     }
                 });
             }
+            viewModel.members.remove(item);
         },
 
         save: function (data, event) {
@@ -38,7 +43,7 @@
                 dataservice_index.postEntity(koMapping.toJSON(data), {
                     done: function (boolResponse) {
                         if (boolResponse) {
-                            router.routeTo('index');
+                            core.notify.info(data.Firstname + ' ' + data.Lastname + ' created successfully');
                             return;
                         }
                         else {
@@ -51,7 +56,7 @@
                 dataservice_index.putEntity(data.Id, koMapping.toJSON(data), {
                     done: function (boolResponse) {
                         if (boolResponse) {
-                            router.routeTo('index');
+                            core.notify.info(data.Firstname + ' ' + data.Lastname + ' updated successfully');
                             return;
                         }
                         else {
@@ -81,7 +86,7 @@
 
     function koMapData(datasource) {
         viewModel.members = ko.observableArray(ko.toJS(datasource));
-        ko.applyBindings(viewModel, $('members')[0]);
+        ko.applyBindings(viewModel, $('#koMembersTable')[0]);
     };
 
     return {
