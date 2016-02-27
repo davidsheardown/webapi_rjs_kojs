@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace EntityDTO
 {
-    public class LoginRequestDTO
+    public class UserResponseDTO
     {
-        public string loginUsername { get; set; }
-        public string loginPassword { get; set; }
+        public string Username { get; set; }
+        public System.Guid UserGuid { get; set; }
     }
 }

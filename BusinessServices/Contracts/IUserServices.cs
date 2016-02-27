@@ -10,7 +10,8 @@ namespace BusinessServices.Contracts
 {
     public interface IUserServices
     {
-        EntityDTO.LoginResponseDTO GetUserLogin(string username, string password);
+        EntityDTO.UserResponseDTO CreateUserLogin(string username, string saltedHashedPassword);
+        EntityDTO.UserDTO GetUserLogin(string username);
         bool CheckUserToken(string userToken);
     }
 }

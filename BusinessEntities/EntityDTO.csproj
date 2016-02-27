@@ -39,8 +39,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="LoginRequestDTO.cs" />
-    <Compile Include="LoginResponseDTO.cs" />
+    <Compile Include="UserRequestDTO.cs" />
+    <Compile Include="UserResponseDTO.cs" />
     <Compile Include="OUmemberDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UserDTO.cs" />

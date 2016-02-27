@@ -9,6 +9,7 @@ using DataModel;
 using DataModel.UnitOfWork;
 using EntityDTO;
 using BusinessServices.Contracts;
+using System.Transactions;
 
 namespace BusinessServices
 {
@@ -21,13 +22,34 @@ namespace BusinessServices
             _unitOfWork = unitOfWork;
         }
 
-        public EntityDTO.LoginResponseDTO GetUserLogin(string username, string password)
+        public EntityDTO.UserResponseDTO CreateUserLogin(string username, string saltedHashedPassword)
         {
-            var user = _unitOfWork.UserRepository.Get(x => x.Username == username && x.Password == password);
+            using (var scope = new TransactionScope())
+            {
+                var user = new User
+                {
+                    Username = username,
+                    Password = saltedHashedPassword,
+                    LastUpdated = DateTime.UtcNow,
+                    DateCreated = DateTime.UtcNow,
+                    UserGuid = Guid.NewGuid(),
+                    UserActive = true
+                };
+                _unitOfWork.UserRepository.Insert(user);
+                _unitOfWork.Save();
+                scope.Complete();
+                Mapper.CreateMap<User, UserResponseDTO>();
+                return Mapper.Map<User, UserResponseDTO>(user);
+            }
+        }
+
+        public EntityDTO.UserDTO GetUserLogin(string username)
+        {
+            var user = _unitOfWork.UserRepository.Get(x => x.Username == username);
             if (user != null)
             {
-                Mapper.CreateMap<User, LoginResponseDTO>();
-                return Mapper.Map<User, LoginResponseDTO>(user);
+                Mapper.CreateMap<User, UserDTO>();
+                return Mapper.Map<User, UserDTO>(user);
             }
             return null;
         }

@@ -12,7 +12,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Frontend_RJS_KJS</RootNamespace>
-    <AssemblyName>HTML5 Boiler Plate v4.3</AssemblyName>
+    <AssemblyName>Frontend_RJS_KJS</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
