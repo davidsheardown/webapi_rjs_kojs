@@ -5,7 +5,7 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace WebApi.Security
+namespace BusinessServices.Security
 {
     public static class Authenticate
     {

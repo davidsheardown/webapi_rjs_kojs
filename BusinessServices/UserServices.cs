@@ -22,10 +22,11 @@ namespace BusinessServices
             _unitOfWork = unitOfWork;
         }
 
-        public EntityDTO.UserResponseDTO CreateUserLogin(string username, string saltedHashedPassword)
+        public EntityDTO.UserResponseDTO CreateUserLogin(string username, string password)
         {
             using (var scope = new TransactionScope())
             {
+                var saltedHashedPassword = Security.Authenticate.CreatePasswordHash(password);
                 var user = new User
                 {
                     Username = username,
@@ -43,13 +44,20 @@ namespace BusinessServices
             }
         }
 
-        public EntityDTO.UserDTO GetUserLogin(string username)
+        public EntityDTO.UserDTO GetUserLogin(string username, string password)
         {
             var user = _unitOfWork.UserRepository.Get(x => x.Username == username);
             if (user != null)
             {
-                Mapper.CreateMap<User, UserDTO>();
-                return Mapper.Map<User, UserDTO>(user);
+                if (Security.Authenticate.VerifyPassword(password, user.Password))
+                {
+                    Mapper.CreateMap<User, UserDTO>();
+                    return Mapper.Map<User, UserDTO>(user);
+                }
+                else
+                {
+                    return null;
+                }
             }
             return null;
         }

@@ -30,14 +30,10 @@ namespace WebApi.Controllers
         {
             if (loginDTO != null)
             {
-                var user = _userServices.GetUserLogin(loginDTO.loginUsername);
+                var user = _userServices.GetUserLogin(loginDTO.loginUsername, loginDTO.loginPassword);
                 if (user != null)
                 {
-                    // Need to validate users password / hashed
-                    if (Security.Authenticate.VerifyPassword(loginDTO.loginPassword, user.Password))
-                    {
-                        return Request.CreateResponse(HttpStatusCode.OK, user);
-                    }
+                    return Request.CreateResponse(HttpStatusCode.OK, user);
                 }
             }
             return Request.CreateErrorResponse(HttpStatusCode.Unauthorized, "No user found matching supplied data");
@@ -49,9 +45,7 @@ namespace WebApi.Controllers
         {
             if (userDTO != null)
             {
-                // Create a salted/hashed password
-                string saltedHashedPassword = Security.Authenticate.CreatePasswordHash(userDTO.loginPassword);
-                var user = _userServices.CreateUserLogin(userDTO.loginUsername, saltedHashedPassword);
+                var user = _userServices.CreateUserLogin(userDTO.loginUsername, userDTO.loginPassword);
                 return Request.CreateResponse(HttpStatusCode.OK, user);
             }
             return Request.CreateErrorResponse(HttpStatusCode.NotFound, "No username or password sent");
